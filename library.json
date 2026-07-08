@@ -1,0 +1,21 @@
+{
+  "name": "TeensyRegs",
+  "description": "A new and more modern way to access and modify registers. This library uses modern C++ features to avoid defines, macros, and other avoidable mistakes.",
+  "keywords": "teensy, registers, regs",
+  "authors": [
+    {
+      "name": "Shawn Silverman",
+      "email": "shawn@pobox.com",
+      "maintainer": true
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ssilverman/TeensyRegs"
+  },
+  "version": "0.1.0-snapshot",
+  "license": "AGPL-3.0-or-later",
+  "homepage": "https://github.com/ssilverman/TeensyRegs",
+  "frameworks": "arduino",
+  "platforms": "teensy"
+}
