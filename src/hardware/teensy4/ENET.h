@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // CCM.h defines all the CCM registers.
-// This file is part of the QNEthernet library.
+// This file is part of the TeensyRegs library.
 
 #pragma once
 
