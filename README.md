@@ -13,3 +13,7 @@ avoidable mistakes.
 ## Table of contents
 
 ## Cookbook
+
+---
+
+Copyright (c) 2026 Shawn Silverman
