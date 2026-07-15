@@ -1,30 +1,40 @@
 #include <cinttypes>
 #include <cstdint>
+#include <cstdio>
 
 #include <Arduino.h>
+#include <elapsedMillis.h>
 
 #include "hardware/teensy4/CCM.h"
 #include "hardware/teensy4/CCM_ANALOG.h"
 #include "hardware/teensy4/DCB.h"
 #include "hardware/teensy4/DWT.h"
 #include "hardware/teensy4/IOMUXC_GPR.h"
+#include "hardware/teensy4/SCB.h"
 
 using namespace qindesign::hardware::teensy4;
 
+static void reboot();
 static void enable_enet_clocks();
 static void disable_enet_clocks();
 static bool arm_high_resolution_clock_init();
 static uint32_t arm_high_resolution_clock_count();
 
-static bool armCounterInitted = false;
+static constexpr float kStartupDelay = 1.5f;
+static constexpr float kRunTime      = 20.0f;
 
+static bool hasARMCounter = false;
+static elapsedMillis mainTimer;
+static elapsedMillis counterTimer;
+
+// Main program setup.
 void setup() {
   Serial.begin(115200);
-  while (!Serial && millis() < 4000) {
+  while (!Serial && millis() < 4'000) {
     // Wait for Serial
   }
-  printf("Waiting for 1.5s...\r\n");
-  delay(1500);
+  printf("Waiting for %gs...\r\n", kStartupDelay);
+  delay(static_cast<uint32_t>(kStartupDelay * 1'000));
 
   enable_enet_clocks();
   printf("ENET enabled\r\n");
@@ -32,18 +42,37 @@ void setup() {
   disable_enet_clocks();
   printf("ENET disabled\r\n");
 
-  armCounterInitted = arm_high_resolution_clock_init();
-  if (!armCounterInitted) {
+  hasARMCounter = arm_high_resolution_clock_init();
+  if (!hasARMCounter) {
     printf("Error: ARM HRC init\r\n");
+  }
+
+  printf("Running for %gs...\r\n", kRunTime);
+
+  mainTimer = 0;
+  counterTimer = 0;
+}
+
+// Main program loop.
+void loop() {
+  // Print the cycle count every second
+  if (hasARMCounter) {
+    if (counterTimer >= 1'000) {
+      printf("%" PRIu32 "\r\n", arm_high_resolution_clock_count());
+      counterTimer = 0;
+    }
+  }
+
+  if (mainTimer >= static_cast<uint32_t>(kRunTime * 1'000)) {
+    printf("Rebooting...\r\n");
+    delay(1000);
+    reboot();
   }
 }
 
-void loop() {
-  // Print the cycle count every second
-  if (armCounterInitted) {
-    printf("%" PRIu32 "\r\n", arm_high_resolution_clock_count());
-    delay(1000);
-  }
+// Reboots the Teensy.
+static void reboot() {
+  SCB->AIRCR = SCB_AIRCR_VECTKEY(0x05fa) | SCB_AIRCR_SYSRESETREQ(1);
 }
 
 // Enables the Ethernet-related clocks. See also disable_enet_clocks().
