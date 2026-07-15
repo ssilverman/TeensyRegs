@@ -10,3 +10,7 @@ and this project adheres to
 
 ### Added
 * Initial release.
+
+---
+
+Copyright (c) 2026 Shawn Silverman
