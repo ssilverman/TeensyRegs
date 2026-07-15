@@ -10,6 +10,8 @@ This library supplies a new and more modern way to access and modify registers.
 It uses modern C++ features to avoid defines, macros, and other
 avoidable mistakes.
 
+Please see _src/main.cpp_ for some example usage.
+
 ## Table of contents
 
 1. [Introduction](#introduction)
