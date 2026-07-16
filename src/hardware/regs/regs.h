@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include <climits>
 #include <cstddef>
 #include <cstdint>
 #include <limits>
@@ -70,7 +69,7 @@ class Reg {
 
  public:
   // Number of bits in one register.
-  static constexpr size_t kRegBits = sizeof(R) * CHAR_BIT;
+  static constexpr size_t kRegBits = std::numeric_limits<R>::digits;
 
   // More parameter shape checks
   static_assert(Bits <= kRegBits, "Bit count exceeds register width");
@@ -207,7 +206,7 @@ class RegValue {
 
  public:
   // Number of bits in one register.
-  static constexpr size_t kRegBits = sizeof(R) * CHAR_BIT;
+  static constexpr size_t kRegBits = std::numeric_limits<R>::digits;
 
   // More parameter shape checks
   static_assert(Bits <= kRegBits, "Bit count exceeds register width");
