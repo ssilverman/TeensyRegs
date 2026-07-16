@@ -158,25 +158,25 @@ constexpr regs::RegGroup<ENET_Layout, kENET_size, kENET2_base> ENET2;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENET_Reg = regs::Reg<uint32_t, kENET_base, ENET_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using ENET_Reg =
+    regs::Reg32<kENET_base, ENET_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENET2_Reg = regs::Reg<uint32_t, kENET2_base, ENET_Layout, Member, 0, Bits,
-                            Shift, DirectAssign>;
+using ENET2_Reg =
+    regs::Reg32<kENET2_base, ENET_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <size_t Index, auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENET_CHANNEL_Reg = regs::Reg<uint32_t, ChannelBase(kENET_base, Index),
-                                   ENET_Layout::CHANNEL_Layout, Member, 0, Bits,
-                                   Shift, DirectAssign>;
+using ENET_CHANNEL_Reg =
+    regs::Reg32<ChannelBase(kENET_base, Index), ENET_Layout::CHANNEL_Layout,
+                Member, 0, Bits, Shift, DirectAssign>;
 
 template <size_t Index, auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENET2_CHANNEL_Reg = regs::Reg<uint32_t, ChannelBase(kENET2_base, Index),
-                                    ENET_Layout::CHANNEL_Layout, Member, 0,
-                                    Bits, Shift, DirectAssign>;
+using ENET2_CHANNEL_Reg =
+    regs::Reg32<ChannelBase(kENET2_base, Index), ENET_Layout::CHANNEL_Layout,
+                Member, 0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 

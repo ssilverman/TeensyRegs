@@ -47,11 +47,11 @@ constexpr regs::RegGroup<IOMUXC_Layout, kIOMUXC_size, kIOMUXC_base> IOMUXC;
 
 // IOMUXC_SW_MUX_CTL_PAD values
 #undef IOMUXC_SW_MUX_CTL_PAD_SION
-constexpr regs::RegValue<uint32_t, 1,  4> IOMUXC_SW_MUX_CTL_PAD_SION;      // Software Input On Field.
+constexpr regs::RegValue32<1, 4> IOMUXC_SW_MUX_CTL_PAD_SION;      // Software Input On Field.
     // 0b0..Input Path is determined by functionality
     // 0b1..Force input path of pad GPIO_AD_B0_00
 #undef IOMUXC_SW_MUX_CTL_PAD_MUX_MODE
-constexpr regs::RegValue<uint32_t, 4,  0> IOMUXC_SW_MUX_CTL_PAD_MUX_MODE;  // MUX Mode Select Field.
+constexpr regs::RegValue32<4, 0> IOMUXC_SW_MUX_CTL_PAD_MUX_MODE;  // MUX Mode Select Field.
     // 0b0000..Select mux mode: ALT0 mux port: USB_OTG1_PWR of instance: usb
     // 0b0001..Select mux mode: ALT1 mux port: QTIMER3_TIMER1 of instance: qtimer3
     // 0b0010..Select mux mode: ALT2 mux port: LPUART2_RTS_B of instance: lpuart2
@@ -65,35 +65,35 @@ constexpr regs::RegValue<uint32_t, 4,  0> IOMUXC_SW_MUX_CTL_PAD_MUX_MODE;  // MU
 
 // IOMUXC_SW_PAD_CTL_PAD values
 #undef IOMUXC_SW_PAD_CTL_PAD_HYS
-constexpr regs::RegValue<uint32_t, 1, 16> IOMUXC_SW_PAD_CTL_PAD_HYS;    // Hyst. Enable Field
+constexpr regs::RegValue32<1, 16> IOMUXC_SW_PAD_CTL_PAD_HYS;    // Hyst. Enable Field
     // 0b0..Hysteresis Disabled
     // 0b1..Hysteresis Enabled
 #undef IOMUXC_SW_PAD_CTL_PAD_PUS
-constexpr regs::RegValue<uint32_t, 2, 14> IOMUXC_SW_PAD_CTL_PAD_PUS;    // Pull Up / Down Config. Field
+constexpr regs::RegValue32<2, 14> IOMUXC_SW_PAD_CTL_PAD_PUS;    // Pull Up / Down Config. Field
     // 0b00..100K Ohm Pull Down
     // 0b01..47K Ohm Pull Up
     // 0b10..100K Ohm Pull Up
     // 0b11..22K Ohm Pull Up
 #undef IOMUXC_SW_PAD_CTL_PAD_PUE
-constexpr regs::RegValue<uint32_t, 1, 13> IOMUXC_SW_PAD_CTL_PAD_PUE;    // Pull / Keep Select Field
+constexpr regs::RegValue32<1, 13> IOMUXC_SW_PAD_CTL_PAD_PUE;    // Pull / Keep Select Field
     // 0b0..Keeper
     // 0b1..Pull
 #undef IOMUXC_SW_PAD_CTL_PAD_PKE
-constexpr regs::RegValue<uint32_t, 1, 12> IOMUXC_SW_PAD_CTL_PAD_PKE;    // Pull / Keep Enable Field
+constexpr regs::RegValue32<1, 12> IOMUXC_SW_PAD_CTL_PAD_PKE;    // Pull / Keep Enable Field
     // 0b0..Pull/Keeper Disabled
     // 0b1..Pull/Keeper Enabled
 #undef IOMUXC_SW_PAD_CTL_PAD_ODE
-constexpr regs::RegValue<uint32_t, 1, 11> IOMUXC_SW_PAD_CTL_PAD_ODE;    // Open Drain Enable Field
+constexpr regs::RegValue32<1, 11> IOMUXC_SW_PAD_CTL_PAD_ODE;    // Open Drain Enable Field
     // 0b0..Open Drain Disabled
     // 0b1..Open Drain Enabled
 #undef IOMUXC_SW_PAD_CTL_PAD_SPEED
-constexpr regs::RegValue<uint32_t, 2,  6> IOMUXC_SW_PAD_CTL_PAD_SPEED;  // Speed Field
+constexpr regs::RegValue32<2,  6> IOMUXC_SW_PAD_CTL_PAD_SPEED;  // Speed Field
     // 0b00..low(50MHz)
     // 0b01..medium(100MHz)
     // 0b10..fast(150MHz)
     // 0b11..max(200MHz)
 #undef IOMUXC_SW_PAD_CTL_PAD_DSE
-constexpr regs::RegValue<uint32_t, 3,  3> IOMUXC_SW_PAD_CTL_PAD_DSE;    // Drive Strength Field
+constexpr regs::RegValue32<3,  3> IOMUXC_SW_PAD_CTL_PAD_DSE;    // Drive Strength Field
     // 0b000..output driver disabled;
     // 0b001..R0(150 Ohm @ 3.3V, 260 Ohm@1.8V)
     // 0b010..R0/2
@@ -103,13 +103,13 @@ constexpr regs::RegValue<uint32_t, 3,  3> IOMUXC_SW_PAD_CTL_PAD_DSE;    // Drive
     // 0b110..R0/6
     // 0b111..R0/7
 #undef IOMUXC_SW_PAD_CTL_PAD_SRE
-constexpr regs::RegValue<uint32_t, 1,  0> IOMUXC_SW_PAD_CTL_PAD_SRE;    // Slew Rate Field
+constexpr regs::RegValue32<1,  0> IOMUXC_SW_PAD_CTL_PAD_SRE;    // Slew Rate Field
     // 0b0..Slow Slew Rate
     // 0b1..Fast Slew Rate
 
 // IOMUXC_SELECT_INPUT_DAISY
 #undef IOMUXC_SELECT_INPUT_DAISY
-constexpr regs::RegValue<uint32_t, 3, 0> IOMUXC_SELECT_INPUT_DAISY;  // Selecting Pads Involved in Daisy Chain.
+constexpr regs::RegValue32<3, 0> IOMUXC_SELECT_INPUT_DAISY;  // Selecting Pads Involved in Daisy Chain.
     // 0b000..Selecting Pad: GPIO_SD_B1_03 for Mode: ALT6
     // 0b001..Selecting Pad: GPIO_AD_B0_12 for Mode: ALT1
     // 0b010..Selecting Pad: GPIO_AD_B1_01 for Mode: ALT4
@@ -118,45 +118,45 @@ constexpr regs::RegValue<uint32_t, 3, 0> IOMUXC_SELECT_INPUT_DAISY;  // Selectin
 
 // IOMUXC_SW_MUX_CTL_PAD_1 values
 #undef IOMUXC_SW_MUX_CTL_PAD_1_SION
-constexpr regs::RegValue<uint32_t, 1, 4> IOMUXC_SW_MUX_CTL_PAD_1_SION;      // Software Input On Field.
+constexpr regs::RegValue32<1, 4> IOMUXC_SW_MUX_CTL_PAD_1_SION;      // Software Input On Field.
     // 0b0..Input Path is determined by functionality
     // 0b1..Force input path of pad GPIO_SPI_B0_00
 #undef IOMUXC_SW_MUX_CTL_PAD_1_MUX_MODE
-constexpr regs::RegValue<uint32_t, 3, 0> IOMUXC_SW_MUX_CTL_PAD_1_MUX_MODE;  // MUX Mode Select Field.
+constexpr regs::RegValue32<3, 0> IOMUXC_SW_MUX_CTL_PAD_1_MUX_MODE;  // MUX Mode Select Field.
     // 0b000..Select mux mode: ALT0 mux port: FLEXSPI2_A_DATA00 of instance: flexspi2
     // 0b101..Select mux mode: ALT5 mux port: GPIO10_IO02 of instance: gpio10
 
 // IOMUXC_SW_PAD_CTL_PAD_1 values
 #undef IOMUXC_SW_PAD_CTL_PAD_1_HYS
-constexpr regs::RegValue<uint32_t, 1, 16> IOMUXC_SW_PAD_CTL_PAD_1_HYS;   // Hyst. Enable Field
+constexpr regs::RegValue32<1, 16> IOMUXC_SW_PAD_CTL_PAD_1_HYS;   // Hyst. Enable Field
     // 0b0..Hysteresis Disabled
     // 0b1..Hysteresis Enabled
 #undef IOMUXC_SW_PAD_CTL_PAD_1_PUS
-constexpr regs::RegValue<uint32_t, 2, 14> IOMUXC_SW_PAD_CTL_PAD_1_PUS;   // Pull Up / Down Config. Field
+constexpr regs::RegValue32<2, 14> IOMUXC_SW_PAD_CTL_PAD_1_PUS;   // Pull Up / Down Config. Field
     // 0b00..100K Ohm Pull Down
     // 0b01..47K Ohm Pull Up
     // 0b10..100K Ohm Pull Up
     // 0b11..22K Ohm Pull Up
 #undef IOMUXC_SW_PAD_CTL_PAD_1_PUE
-constexpr regs::RegValue<uint32_t, 1, 13> IOMUXC_SW_PAD_CTL_PAD_1_PUE;   // Pull / Keep Select Field
+constexpr regs::RegValue32<1, 13> IOMUXC_SW_PAD_CTL_PAD_1_PUE;   // Pull / Keep Select Field
     // 0b0..Keeper
     // 0b1..Pull
 #undef IOMUXC_SW_PAD_CTL_PAD_1_PKE
-constexpr regs::RegValue<uint32_t, 1, 12> IOMUXC_SW_PAD_CTL_PAD_1_PKE;   // Pull / Keep Enable Field
+constexpr regs::RegValue32<1, 12> IOMUXC_SW_PAD_CTL_PAD_1_PKE;   // Pull / Keep Enable Field
     // 0b0..Pull/Keeper Disabled
     // 0b1..Pull/Keeper Enabled
 #undef IOMUXC_SW_PAD_CTL_PAD_1_ODE
-constexpr regs::RegValue<uint32_t, 1, 11> IOMUXC_SW_PAD_CTL_PAD_1_ODE;   // Open Drain Enable Field
+constexpr regs::RegValue32<1, 11> IOMUXC_SW_PAD_CTL_PAD_1_ODE;   // Open Drain Enable Field
     // 0b0..Open Drain Disabled
     // 0b1..Open Drain Enabled
 #undef IOMUXC_SW_PAD_CTL_PAD_1_SPEED
-constexpr regs::RegValue<uint32_t, 2, 6> IOMUXC_SW_PAD_CTL_PAD_1_SPEED;  // Speed Field
+constexpr regs::RegValue32<2,  6> IOMUXC_SW_PAD_CTL_PAD_1_SPEED;  // Speed Field
     // 0b00..low(50MHz)
     // 0b01..medium(100MHz)
     // 0b10..fast(150MHz)
     // 0b11..max(200MHz)
 #undef IOMUXC_SW_PAD_CTL_PAD_1_DSE
-constexpr regs::RegValue<uint32_t, 3, 3> IOMUXC_SW_PAD_CTL_PAD_1_DSE;    // Drive Strength Field
+constexpr regs::RegValue32<3,  3> IOMUXC_SW_PAD_CTL_PAD_1_DSE;    // Drive Strength Field
     // 0b000..output driver disabled;
     // 0b001..R0(150 Ohm @ 3.3V, 260 Ohm@1.8V)
     // 0b010..R0/2
@@ -166,13 +166,13 @@ constexpr regs::RegValue<uint32_t, 3, 3> IOMUXC_SW_PAD_CTL_PAD_1_DSE;    // Driv
     // 0b110..R0/6
     // 0b111..R0/7
 #undef IOMUXC_SW_PAD_CTL_PAD_1_SRE
-constexpr regs::RegValue<uint32_t, 1, 0> IOMUXC_SW_PAD_CTL_PAD_1_SRE;  // Slew Rate Field
+constexpr regs::RegValue32<1,  0> IOMUXC_SW_PAD_CTL_PAD_1_SRE;  // Slew Rate Field
     // 0b0..Slow Slew Rate
     // 0b1..Fast Slew Rate
 
 // IOMUXC_SELECT_INPUT_1 values
 #undef IOMUXC_SELECT_INPUT_1_DAISY
-constexpr regs::RegValue<uint32_t, 2, 0> IOMUXC_SELECT_INPUT_1_DAISY;  // Selecting Pads Involved in Daisy Chain.
+constexpr regs::RegValue32<2, 0> IOMUXC_SELECT_INPUT_1_DAISY;  // Selecting Pads Involved in Daisy Chain.
     // 0b00..Selecting Pad: GPIO_SD_B0_00 for Mode: ALT9
     // 0b01..Selecting Pad: GPIO_EMC_39 for Mode: ALT9
     // 0b10..Selecting Pad: GPIO_AD_B0_09 for Mode: ALT9
@@ -180,8 +180,8 @@ constexpr regs::RegValue<uint32_t, 2, 0> IOMUXC_SELECT_INPUT_1_DAISY;  // Select
 
 template <auto Member, size_t MemberOffset, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using IOMUXC_Reg = regs::Reg<uint32_t, kIOMUXC_base, IOMUXC_Layout, Member,
-                             MemberOffset, Bits, Shift, DirectAssign>;
+using IOMUXC_Reg = regs::Reg32<kIOMUXC_base, IOMUXC_Layout, Member,
+                               MemberOffset, Bits, Shift, DirectAssign>;
 
 // IOMUXC SW_MUX_CTL_PAD
 

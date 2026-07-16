@@ -56,23 +56,23 @@ constexpr regs::RegGroup<ENC_Layout, kENC_size, kENC4_base> ENC4;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENC1_Reg = regs::Reg<uint16_t, kENC1_base, ENC_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using ENC1_Reg =
+    regs::Reg16<kENC1_base, ENC_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENC2_Reg = regs::Reg<uint16_t, kENC2_base, ENC_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using ENC2_Reg =
+    regs::Reg16<kENC2_base, ENC_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENC3_Reg = regs::Reg<uint16_t, kENC3_base, ENC_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using ENC3_Reg =
+    regs::Reg16<kENC3_base, ENC_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using ENC4_Reg = regs::Reg<uint16_t, kENC4_base, ENC_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using ENC4_Reg =
+    regs::Reg16<kENC4_base, ENC_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 

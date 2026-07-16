@@ -37,13 +37,13 @@ constexpr regs::RegGroup<WDOG_Layout, kWDOG_size, kWDOG2_base> WDOG2;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using WDOG1_Reg = regs::Reg<uint16_t, kWDOG1_base, WDOG_Layout, Member, 0, Bits,
-                            Shift, DirectAssign>;
+using WDOG1_Reg =
+    regs::Reg16<kWDOG1_base, WDOG_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using WDOG2_Reg = regs::Reg<uint16_t, kWDOG2_base, WDOG_Layout, Member, 0, Bits,
-                            Shift, DirectAssign>;
+using WDOG2_Reg =
+    regs::Reg16<kWDOG2_base, WDOG_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 

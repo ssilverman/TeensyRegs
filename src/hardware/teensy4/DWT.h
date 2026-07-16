@@ -54,8 +54,8 @@ constexpr regs::RegGroup<DWT_Layout, kDWT_size, kDWT_base> DWT;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using DWT_Reg = regs::Reg<uint32_t, kDWT_base, DWT_Layout, Member, 0, Bits,
-                          Shift, DirectAssign>;
+using DWT_Reg =
+    regs::Reg32<kDWT_base, DWT_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 
@@ -119,27 +119,27 @@ constexpr DWT_Reg<&DWT_Layout::FOLDCNT, 8, 0> DWT_FOLDCNT_FOLDCNT;
 
 // DWT Comparator Mask Register Definitions
 #undef DWT_MASK_MASK
-constexpr regs::RegValue<uint32_t, 5, 0> DWT_MASK_MASK;
+constexpr regs::RegValue32<5, 0> DWT_MASK_MASK;
 
 // DWT Comparator Function Register Definitions
 #undef DWT_FUNCTION_MATCHED
-constexpr regs::RegValue<uint32_t, 1, 24> DWT_FUNCTION_MATCHED;
+constexpr regs::RegValue32<1, 24> DWT_FUNCTION_MATCHED;
 #undef DWT_FUNCTION_DATAVADDR1
-constexpr regs::RegValue<uint32_t, 4, 16> DWT_FUNCTION_DATAVADDR1;
+constexpr regs::RegValue32<4, 16> DWT_FUNCTION_DATAVADDR1;
 #undef DWT_FUNCTION_DATAVADDR0
-constexpr regs::RegValue<uint32_t, 4, 12> DWT_FUNCTION_DATAVADDR0;
+constexpr regs::RegValue32<4, 12> DWT_FUNCTION_DATAVADDR0;
 #undef DWT_FUNCTION_DATAVSIZE
-constexpr regs::RegValue<uint32_t, 2, 10> DWT_FUNCTION_DATAVSIZE;
+constexpr regs::RegValue32<2, 10> DWT_FUNCTION_DATAVSIZE;
 #undef DWT_FUNCTION_LNK1ENA
-constexpr regs::RegValue<uint32_t, 1,  9> DWT_FUNCTION_LNK1ENA;
+constexpr regs::RegValue32<1,  9> DWT_FUNCTION_LNK1ENA;
 #undef DWT_FUNCTION_DATAVMATCH
-constexpr regs::RegValue<uint32_t, 1,  8> DWT_FUNCTION_DATAVMATCH;
+constexpr regs::RegValue32<1,  8> DWT_FUNCTION_DATAVMATCH;
 #undef DWT_FUNCTION_CYCMATCH
-constexpr regs::RegValue<uint32_t, 1,  7> DWT_FUNCTION_CYCMATCH;
+constexpr regs::RegValue32<1,  7> DWT_FUNCTION_CYCMATCH;
 #undef DWT_FUNCTION_EMITRANGE
-constexpr regs::RegValue<uint32_t, 1,  5> DWT_FUNCTION_EMITRANGE;
+constexpr regs::RegValue32<1,  5> DWT_FUNCTION_EMITRANGE;
 #undef DWT_FUNCTION_FUNCTION
-constexpr regs::RegValue<uint32_t, 4,  0> DWT_FUNCTION_FUNCTION;
+constexpr regs::RegValue32<4,  0> DWT_FUNCTION_FUNCTION;
 
 }  // namespace teensy4
 }  // namespace hardware

@@ -147,8 +147,8 @@ constexpr regs::RegGroup<OCOTP_Layout, kOCOTP_size, kOCOTP_base> OCOTP;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using OCOTP_Reg = regs::Reg<uint32_t, kOCOTP_base, OCOTP_Layout, Member, 0,
-                            Bits, Shift, DirectAssign>;
+using OCOTP_Reg = regs::Reg32<kOCOTP_base, OCOTP_Layout, Member, 0, Bits, Shift,
+                              DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 

@@ -35,8 +35,8 @@ constexpr regs::RegGroup<DCB_Layout, kDCB_size, kDCB_base> DCB;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using DCB_Reg = regs::Reg<uint32_t, kDCB_base, DCB_Layout, Member, 0, Bits,
-                          Shift, DirectAssign>;
+using DCB_Reg =
+    regs::Reg32<kDCB_base, DCB_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 

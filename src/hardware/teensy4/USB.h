@@ -89,13 +89,13 @@ constexpr regs::RegGroup<USB_Layout, kUSB_size, kUSB2_base> USB2;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using USB1_Reg = regs::Reg<uint32_t, kUSB1_base, USB_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using USB1_Reg =
+    regs::Reg32<kUSB1_base, USB_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using USB2_Reg = regs::Reg<uint32_t, kUSB2_base, USB_Layout, Member, 0, Bits,
-                           Shift, DirectAssign>;
+using USB2_Reg =
+    regs::Reg32<kUSB2_base, USB_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 
@@ -602,29 +602,29 @@ constexpr USB1_Reg<&USB_Layout::ENDPTCOMPLETE, 8,  0> USB1_ENDPTCOMPLETE_ERCE;
 
 // Endpoint Control values
 #undef USB_ENDPTCTRL_TXE
-constexpr regs::RegValue<uint32_t, 1, 23> USB_ENDPTCTRL_TXE;
+constexpr regs::RegValue32<1, 23> USB_ENDPTCTRL_TXE;
 #undef USB_ENDPTCTRL_TXR
-constexpr regs::RegValue<uint32_t, 1, 22> USB_ENDPTCTRL_TXR;
+constexpr regs::RegValue32<1, 22> USB_ENDPTCTRL_TXR;
 #undef USB_ENDPTCTRL_TXI
-constexpr regs::RegValue<uint32_t, 1, 21> USB_ENDPTCTRL_TXI;
+constexpr regs::RegValue32<1, 21> USB_ENDPTCTRL_TXI;
 #undef USB_ENDPTCTRL_TXT
-constexpr regs::RegValue<uint32_t, 2, 18> USB_ENDPTCTRL_TXT;
+constexpr regs::RegValue32<2, 18> USB_ENDPTCTRL_TXT;
 #undef USB_ENDPTCTRL_TXD
-constexpr regs::RegValue<uint32_t, 1, 17> USB_ENDPTCTRL_TXD;
+constexpr regs::RegValue32<1, 17> USB_ENDPTCTRL_TXD;
 #undef USB_ENDPTCTRL_TXS
-constexpr regs::RegValue<uint32_t, 1, 16> USB_ENDPTCTRL_TXS;
+constexpr regs::RegValue32<1, 16> USB_ENDPTCTRL_TXS;
 #undef USB_ENDPTCTRL_RXE
-constexpr regs::RegValue<uint32_t, 1,  7> USB_ENDPTCTRL_RXE;
+constexpr regs::RegValue32<1,  7> USB_ENDPTCTRL_RXE;
 #undef USB_ENDPTCTRL_RXR
-constexpr regs::RegValue<uint32_t, 1,  6> USB_ENDPTCTRL_RXR;
+constexpr regs::RegValue32<1,  6> USB_ENDPTCTRL_RXR;
 #undef USB_ENDPTCTRL_RXI
-constexpr regs::RegValue<uint32_t, 1,  5> USB_ENDPTCTRL_RXI;
+constexpr regs::RegValue32<1,  5> USB_ENDPTCTRL_RXI;
 #undef USB_ENDPTCTRL_RXT
-constexpr regs::RegValue<uint32_t, 2,  2> USB_ENDPTCTRL_RXT;
+constexpr regs::RegValue32<2,  2> USB_ENDPTCTRL_RXT;
 #undef USB_ENDPTCTRL_RXD
-constexpr regs::RegValue<uint32_t, 1,  1> USB_ENDPTCTRL_RXD;
+constexpr regs::RegValue32<1,  1> USB_ENDPTCTRL_RXD;
 #undef USB_ENDPTCTRL_RXS
-constexpr regs::RegValue<uint32_t, 1,  0> USB_ENDPTCTRL_RXS;
+constexpr regs::RegValue32<1,  0> USB_ENDPTCTRL_RXS;
 
 // USB2 Identification register
 #undef USB2_ID_REVISION

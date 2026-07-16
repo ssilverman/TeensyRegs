@@ -94,8 +94,8 @@ constexpr regs::RegGroup<CCM_ANALOG_Layout, kCCM_ANALOG_size, kCCM_ANALOG_base>
 
 template <auto Member, size_t Bits, unsigned int Shift,
           bool DirectAssign = false>
-using CCM_ANALOG_Reg = regs::Reg<uint32_t, kCCM_ANALOG_base, CCM_ANALOG_Layout,
-                                 Member, 0, Bits, Shift, DirectAssign>;
+using CCM_ANALOG_Reg = regs::Reg32<kCCM_ANALOG_base, CCM_ANALOG_Layout, Member,
+                                   0, Bits, Shift, DirectAssign>;
 
 // Undefine anything defined by Teensyduino's imxrt.h
 
