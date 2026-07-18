@@ -1,4 +1,4 @@
-# Changelog for the _TeensyRegs_ Library
+# Changelog for the _imxrt1060-regs_ Library
 
 This document details the changes between each release.
 

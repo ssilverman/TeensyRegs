@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 // regs.h defines some useful register-related utilities.
-// This file is part of the TeensyRegs library.
+// This file is part of the imxrt1060-regs library.
 
 #pragma once
 

@@ -2,7 +2,7 @@
 or
 [![Buy Me a Coffee donate button](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00)](https://www.buymeacoffee.com/ssilverman "Donate to this project using Buy Me a Coffee")
 
-# _TeensyRegs_, a new and more modern way to access and modify registers
+# _imxrt1060-regs_, a new and more modern way to access and modify registers
 
 _Version: 0.1.0-snapshot_
 
