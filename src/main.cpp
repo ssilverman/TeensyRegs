@@ -8,6 +8,9 @@
 #include <Arduino.h>
 #include <elapsedMillis.h>
 
+// Undefine some conflicting Arduino-defined things
+#undef PI
+
 #if !USE_OLD_WAY
 #include "hardware/imxrt1060/CCM.h"
 #include "hardware/imxrt1060/CCM_ANALOG.h"
@@ -15,6 +18,7 @@
 #include "hardware/imxrt1060/DWT.h"
 #include "hardware/imxrt1060/IOMUXC_GPR.h"
 #include "hardware/imxrt1060/SCB.h"
+#include "hardware/imxrt1060/USB.h"
 #endif  // !USE_OLD_WAY
 
 #if !USE_OLD_WAY
@@ -91,11 +95,29 @@ void loop() {
 // Reboots the Teensy.
 static void reboot() {
 #if !USE_OLD_WAY
-  SCB::group->AIRCR =
-      SCB::AIRCR::VECTKEY(0x05fa) | SCB::AIRCR::SYSRESETREQ(1);
+  USB1::group->USBCMD = 0;  // Disconnect USB
+  delay(50);                // Enough time for USB hubs/ports to detect disconnect
+
+  asm volatile ("dsb sy" ::: "memory");
+  SCB::group->AIRCR = SCB::AIRCR::VECTKEY(0x05fa) |
+                      (SCB::group->AIRCR & SCB::AIRCR::PRIGROUP.kMask) |
+                      SCB::AIRCR::SYSRESETREQ(1);
+      // Keep priority group unchanged
 #else
-  SCB_AIRCR = 0x05fa0000 | 0x0004;
+  USB1_USBCMD = 0;  // Disconnect USB
+  delay(50);        // Enough time for USB hubs/ports to detect disconnect
+
+  asm volatile ("dsb sy" ::: "memory");
+  SCB_AIRCR = (0x05faU << 16) | (SCB_AIRCR & (0x7U << 8)) | 0x0004U;
+      // Keep priority group unchanged
 #endif  // !USE_OLD_WAY
+
+  asm volatile ("dsb sy" ::: "memory");
+
+  // Wait for reboot
+  while (true) {
+    asm volatile ("nop");
+  }
 }
 
 // Enables the Ethernet-related clocks. See also disable_enet_clocks().
