@@ -1,3 +1,6 @@
+// Define MAIN_TEST_PROGRAM to use this test program.
+#if defined(IMXRT1060REGS_MAIN_TEST_PROGRAM) && !defined(PIO_UNIT_TESTING)
+
 // To use the old way, set this to 1.
 #define USE_OLD_WAY 0
 
@@ -51,7 +54,6 @@ static inline void clearAndSet32(volatile uint32_t* const reg,
 #endif  // USE_OLD_WAY
 
 // Main program setup.
-[[gnu::weak]]
 void setup() {
   Serial.begin(115200);
   while (!Serial && millis() < 4'000) {
@@ -77,7 +79,6 @@ void setup() {
   counterTimer = 0;
 }
 
-[[gnu::weak]]
 // Main program loop.
 void loop() {
   // Print the cycle count every second
@@ -302,3 +303,5 @@ static uint32_t arm_high_resolution_clock_count() {
   return ARM_DWT_CYCCNT;
 #endif  // !USE_OLD_WAY
 }
+
+#endif  // defined(IMXRT1060REGS_MAIN_TEST_PROGRAM) && !defined(PIO_UNIT_TESTING)
