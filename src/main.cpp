@@ -23,20 +23,23 @@
 #include "hardware/imxrt1060/IOMUXC_GPR.h"
 #include "hardware/imxrt1060/SCB.h"
 #include "hardware/imxrt1060/USB.h"
+#include "hardware/imxrt1060/WDOG.h"
 #endif  // !USE_OLD_WAY
 
 #if !USE_OLD_WAY
 using namespace qindesign::hardware::imxrt1060;
 #endif  // !USE_OLD_WAY
 
+static void init_watchdog();
 static void reboot();
 static void enable_enet_clocks();
 static void disable_enet_clocks();
 static bool arm_high_resolution_clock_init();
 static uint32_t arm_high_resolution_clock_count();
 
-static constexpr float kStartupDelay = 1.5f;
-static constexpr float kRunTime      = 20.0f;
+static constexpr float kStartupDelay    = 1.5f;
+static constexpr float kWatchdogTimeout = 30.0f;
+static constexpr float kRunTime         = 20.0f;
 
 static bool hasARMCounter = false;
 static elapsedMillis mainTimer;
@@ -94,6 +97,21 @@ void loop() {
     delay(1000);
     reboot();
   }
+}
+
+// Initializes Watchdog 1.
+static void init_watchdog() {
+  // Find the timeout in half-seconds (starting at 1 of them)
+  const auto wt = static_cast<uint16_t>((kWatchdogTimeout/0.5f + 0.5f) - 1);
+
+  // First enable the clock
+  CCM::CCGR3::WDOG1 = CCM::CCGR::kON;
+
+  // Set the timeout
+  WDOG1::WCR::WT = wt;
+
+  // Enable it
+  WDOG1::WCR::WDE = 1;
 }
 
 // Reboots the Teensy.
