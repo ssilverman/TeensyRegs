@@ -171,17 +171,8 @@ template <auto Member, size_t Bits, unsigned int Shift,
 using ENET2_Reg =
     regs::Reg32<kENET2_base, ENET_Layout, Member, 0, Bits, Shift, DirectAssign>;
 
-template <size_t Index, auto Member, size_t Bits, unsigned int Shift,
-          bool DirectAssign = false>
-using ENET_CHANNEL_Reg =
-    regs::Reg32<ChannelBase(kENET_base, Index), ENET_Layout::CHANNEL_Layout,
-                Member, 0, Bits, Shift, DirectAssign>;
-
-template <size_t Index, auto Member, size_t Bits, unsigned int Shift,
-          bool DirectAssign = false>
-using ENET2_CHANNEL_Reg =
-    regs::Reg32<ChannelBase(kENET2_base, Index), ENET_Layout::CHANNEL_Layout,
-                Member, 0, Bits, Shift, DirectAssign>;
+template <size_t Bits, unsigned int Shift>
+using ENET_CHANNEL_RegValue = regs::RegValue32<Bits, Shift>;
 
 namespace ENET {
 
@@ -609,21 +600,22 @@ constexpr ENET_Reg<&ENET_Layout::TGSR, 1, 0, true> TF0;  // Copy Of Timer Flag F
 }  // namespace TGSR
 
 // Timer Control Status Register
-namespace TCSR0 {
-constexpr ENET_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;   // Timer PulseWidth Control
+namespace CHANNEL {
+namespace TCSR {
+constexpr ENET_CHANNEL_RegValue<5, 11> TPWC;   // Timer PulseWidth Control
     // 'value' + 1 1588-clock cycles:
     // 0b00000..Pulse width is one 1588-clock cycle.
     // 0b00001..Pulse width is two 1588-clock cycles.
     // 0b00010..Pulse width is three 1588-clock cycles.
     // 0b00011..Pulse width is four 1588-clock cycles.
     // 0b11111..Pulse width is 32 1588-clock cycles.
-constexpr ENET_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;     // Timer Flag
+constexpr ENET_CHANNEL_RegValue<1,  7> TF;     // Timer Flag
     // 0b0..Input Capture or Output Compare has not occurred.
     // 0b1..Input Capture or Output Compare has occurred.
-constexpr ENET_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;    // Timer Interrupt Enable
+constexpr ENET_CHANNEL_RegValue<1,  6> TIE;    // Timer Interrupt Enable
     // 0b0..Interrupt is disabled
     // 0b1..Interrupt is enabled
-constexpr ENET_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;  // Timer Mode
+constexpr ENET_CHANNEL_RegValue<4,  2> TMODE;  // Timer Mode
     // 0b0000..Timer Channel is disabled.
     // 0b0001..Timer Channel is configured for Input Capture on rising edge.
     // 0b0010..Timer Channel is configured for Input Capture on falling edge.
@@ -638,34 +630,12 @@ constexpr ENET_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE; 
     // 0b110x..Reserved
     // 0b1110..Timer Channel is configured for Output Compare - pulse output low on compare for 1 to 32 1588-clock cycles as specified by TPWC.
     // 0b1111..Timer Channel is configured for Output Compare - pulse output high on compare for 1 to 32 1588-clock cycles as specified by TPWC.
-constexpr ENET_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;   // Timer DMA Request Enable
+constexpr ENET_CHANNEL_RegValue<1,  0> TDRE;   // Timer DMA Request Enable
     // 0b0..DMA request is disabled
     // 0b1..DMA request is enabled
-}  // namespace TCSR0
+}  // namespace TCSR
+}  // namespace CHANNEL
 
-namespace TCSR1 {
-constexpr ENET_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR1
-
-namespace TCSR2 {
-constexpr ENET_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR2
-
-namespace TCSR3 {
-constexpr ENET_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR3
 }  // namespace ENET
 
 namespace ENET2 {
@@ -882,38 +852,6 @@ constexpr ENET2_Reg<&ENET_Layout::TGSR, 1, 2, true> TF2;
 constexpr ENET2_Reg<&ENET_Layout::TGSR, 1, 1, true> TF1;
 constexpr ENET2_Reg<&ENET_Layout::TGSR, 1, 0, true> TF0;
 }  // namespace TGSR
-
-namespace TCSR0 {
-constexpr ENET2_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET2_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET2_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET2_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET2_CHANNEL_Reg<0, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR0
-
-namespace TCSR1 {
-constexpr ENET2_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET2_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET2_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET2_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET2_CHANNEL_Reg<1, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR1
-
-namespace TCSR2 {
-constexpr ENET2_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET2_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET2_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET2_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET2_CHANNEL_Reg<2, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR2
-
-namespace TCSR3 {
-constexpr ENET2_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 5, 11> TPWC;
-constexpr ENET2_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  7> TF;
-constexpr ENET2_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  6> TIE;
-constexpr ENET2_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 4,  2> TMODE;
-constexpr ENET2_CHANNEL_Reg<3, &ENET_Layout::CHANNEL_Layout::TCSR, 1,  0> TDRE;
-}  // namespace TCSR3
 
 }  // namespace ENET2
 
